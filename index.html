@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!--=== HTML Meta Tags ===-->
+    <title>Feel That? That's True...</title>
+    <meta name="description" content="Feel That? That's True..." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+    <!--=== Favicon ===-->
+    <link rel="icon" href="https://fav.farm/🐱" />
+    <!--=== CDN links ===-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
+    <!--=== CSS (I'm lazy) ===-->
+    <style>
+      :root {
+        --clr-bg: #1a1a1a;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        overflow: clip;
+      }
+
+      /* Cover */
+      #cover {
+        display: grid;
+        place-items: center;
+        height: 100%;
+        width: 100%;
+        /* position: absolute; */
+        background-color: var(--clr-bg);
+      }
+      #cover button {
+        font-size: 8vw;
+        border-radius: 0.25em;
+        padding: 0.5em 0.75em;
+      }
+
+      /* Main image */
+      main {
+        height: 100%;
+        background-color: var(--clr-bg);
+      }
+      video {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        max-height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="cover">
+      <button>Open web app</button>
+    </div>
+    <main>
+      <video src="kotaro-true.mp4" loop autoplay muted></video>
+    </main>
+    <!--=== JS (I'm lazy) ===-->
+    <script>
+      // Setup fullscreen
+      document.addEventListener("click", () => {
+        document.documentElement.requestFullscreen.call(document.documentElement);
+        const cover = document.getElementById("cover");
+        cover.style = "display: none;";
+        console.log(cover);
+      });
+
+      // Troll on escape
+      document.addEventListener(
+        "fullscreenchange",
+        (e) => {
+          if (document.webkitIsFullScreen || document.mozFullScreen || document.msFullscreenElement) {
+            return;
+          }
+          alert("You fool");
+          // window.location.replace("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+        },
+        false
+      );
+    </script>
+  </body>
+</html>
