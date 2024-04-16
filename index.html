@@ -55,7 +55,7 @@
   </head>
   <body>
     <div id="cover">
-      <button>Open web app</button>
+      <button id="start">Open web app</button>
     </div>
     <main>
       <video src="kotaro-true.mp4" loop autoplay muted></video>
@@ -63,24 +63,25 @@
     <!--=== JS (I'm lazy) ===-->
     <script>
       // Setup fullscreen
-      document.addEventListener("click", () => {
+      const startButton = document.getElementById("start");
+      startButton.addEventListener("click", () => {
         document.documentElement.requestFullscreen.call(document.documentElement);
         const cover = document.getElementById("cover");
         cover.style = "display: none;";
       });
 
       // Troll on escape
-      document.addEventListener(
-        "fullscreenchange",
-        (e) => {
-          if (document.webkitIsFullScreen || document.mozFullScreen || document.msFullscreenElement) {
-            return;
-          }
-          alert("You fool");
-          window.location.replace("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
-        },
-        false
-      );
+      document.addEventListener("fullscreenchange", handleExit, false);
+      document.addEventListener("mozfullscreenchange", handleExit, false);
+      document.addEventListener("MSFullscreenChange", handleExit, false);
+      document.addEventListener("webkitfullscreenchange", handleExit, false);
+      function handleExit(e) {
+        if (document.webkitIsFullScreen || document.mozFullScreen || document.msFullscreenElement) {
+          return;
+        }
+        alert("You fool");
+        window.location.replace("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+      }
     </script>
   </body>
 </html>
